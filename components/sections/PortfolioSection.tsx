@@ -118,8 +118,11 @@ export default function PortfolioSection() {
               subtitle="Explore our curated portfolio of residential and commercial spaces, showcasing the enduring power of precision painting."
             />
 
-            {/* Filter Pills */}
-            <div className="flex flex-wrap items-center gap-2 mt-8 md:mt-0" role="tablist">
+            {/* Filter Pills: Horizontal scroll on mobile, wrap on desktop */}
+            <div
+              className="flex items-center gap-2 mt-6 md:mt-0 overflow-x-auto no-scrollbar pb-1 -mx-6 px-6 sm:mx-0 sm:px-0 sm:flex-wrap"
+              role="tablist"
+            >
               {[
                 { id: "all", label: "All Projects" },
                 { id: "interior", label: "Interiors" },
@@ -132,9 +135,9 @@ export default function PortfolioSection() {
                   role="tab"
                   aria-selected={activeFilter === tab.id}
                   onClick={() => setActiveFilter(tab.id)}
-                  className={`text-xs uppercase tracking-wider px-3.5 py-1.5 rounded-xs transition-all cursor-pointer font-medium ${
+                  className={`text-xs uppercase tracking-wider px-3.5 py-1.5 rounded-xs transition-all cursor-pointer font-medium whitespace-nowrap shrink-0 ${
                     activeFilter === tab.id
-                      ? "bg-[#20231F] text-[#FAF8F5] shadow-xs scale-105"
+                      ? "bg-[#20231F] text-[#FAF8F5] shadow-xs"
                       : "bg-[#F6F3ED] text-[#7A7265] hover:text-[#20231F] border border-[#D8D1C5]/60"
                   }`}
                 >

@@ -87,3 +87,17 @@ body {
   backface-visibility: hidden;
   perspective: 1000px;
 }
+
+/* Hide scrollbars for horizontal chip carousels on mobile */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Touch action utilities */
+.touch-pan-y {
+  touch-action: pan-y;
+}

@@ -251,7 +251,7 @@ export default function QuoteSection() {
                         value={formData.fullName}
                         onChange={handleChange}
                         placeholder="e.g. Julian Hayes"
-                        className={`w-full bg-[#20231F] border rounded-xs px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#C65F43] transition-colors ${
+                        className={`w-full bg-[#20231F] border rounded-xs px-4 py-3 text-base sm:text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#C65F43] transition-colors ${
                           errors.fullName
                             ? "border-[#C65F43]"
                             : "border-white/15 hover:border-white/30"
@@ -276,11 +276,12 @@ export default function QuoteSection() {
                         id="email-address"
                         name="email"
                         type="email"
+                        inputMode="email"
                         required
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="julian@example.com"
-                        className={`w-full bg-[#20231F] border rounded-xs px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#C65F43] transition-colors ${
+                        className={`w-full bg-[#20231F] border rounded-xs px-4 py-3 text-base sm:text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#C65F43] transition-colors ${
                           errors.email
                             ? "border-[#C65F43]"
                             : "border-white/15 hover:border-white/30"
@@ -310,10 +311,11 @@ export default function QuoteSection() {
                         id="phone-number"
                         name="phone"
                         type="tel"
+                        inputMode="tel"
                         value={formData.phone}
                         onChange={handleChange}
                         placeholder="(555) 000-0000"
-                        className="w-full bg-[#20231F] border border-white/15 hover:border-white/30 rounded-xs px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#C65F43] transition-colors"
+                        className="w-full bg-[#20231F] border border-white/15 hover:border-white/30 rounded-xs px-4 py-3 text-base sm:text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#C65F43] transition-colors"
                       />
                     </div>
 
@@ -330,7 +332,7 @@ export default function QuoteSection() {
                         name="serviceType"
                         value={formData.serviceType}
                         onChange={handleChange}
-                        className="w-full bg-[#20231F] border border-white/15 hover:border-white/30 rounded-xs px-4 py-3 text-sm text-white focus:outline-none focus:border-[#C65F43] transition-colors cursor-pointer"
+                        className="w-full bg-[#20231F] border border-white/15 hover:border-white/30 rounded-xs px-4 py-3 text-base sm:text-sm text-white focus:outline-none focus:border-[#C65F43] transition-colors cursor-pointer"
                       >
                         <option value="Interior Painting">
                           Interior Painting (Walls, Ceilings, Millwork)
@@ -362,7 +364,7 @@ export default function QuoteSection() {
                         name="propertyType"
                         value={formData.propertyType}
                         onChange={handleChange}
-                        className="w-full bg-[#20231F] border border-white/15 hover:border-white/30 rounded-xs px-4 py-3 text-sm text-white focus:outline-none focus:border-[#C65F43] transition-colors cursor-pointer"
+                        className="w-full bg-[#20231F] border border-white/15 hover:border-white/30 rounded-xs px-4 py-3 text-base sm:text-sm text-white focus:outline-none focus:border-[#C65F43] transition-colors cursor-pointer"
                       >
                         <option value="Single Family Home">
                           Single Family Home
@@ -390,7 +392,7 @@ export default function QuoteSection() {
                         name="timeline"
                         value={formData.timeline}
                         onChange={handleChange}
-                        className="w-full bg-[#20231F] border border-white/15 hover:border-white/30 rounded-xs px-4 py-3 text-sm text-white focus:outline-none focus:border-[#C65F43] transition-colors cursor-pointer"
+                        className="w-full bg-[#20231F] border border-white/15 hover:border-white/30 rounded-xs px-4 py-3 text-base sm:text-sm text-white focus:outline-none focus:border-[#C65F43] transition-colors cursor-pointer"
                       >
                         <option value="Immediate (Within 2-3 weeks)">
                           Immediate (Within 2-3 weeks)
@@ -420,7 +422,7 @@ export default function QuoteSection() {
                       value={formData.details}
                       onChange={handleChange}
                       placeholder="Describe the rooms, current surface conditions, preferred colors or sheens, and approximate dimensions..."
-                      className={`w-full bg-[#20231F] border rounded-xs px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#C65F43] transition-colors ${
+                      className={`w-full bg-[#20231F] border rounded-xs px-4 py-3 text-base sm:text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#C65F43] transition-colors ${
                         errors.details
                           ? "border-[#C65F43]"
                           : "border-white/15 hover:border-white/30"

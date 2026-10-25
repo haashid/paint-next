@@ -266,7 +266,7 @@ export default function SiteHeader() {
             </nav>
           </div>
 
-          <div className="pt-6 border-t border-[#D8D1C5]/60 flex flex-col gap-4">
+          <div className="pt-6 border-t border-[#D8D1C5]/60 flex flex-col gap-3">
             <Button
               href="#quote"
               onClick={() => {
@@ -282,6 +282,12 @@ export default function SiteHeader() {
             >
               Get a Free Quote
             </Button>
+            <a
+              href="tel:+18005558291"
+              className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xs border border-[#D8D1C5] text-[#20231F] text-xs font-mono uppercase tracking-wider hover:bg-[#D8D1C5]/30 transition-colors"
+            >
+              <span>Call: (800) 555-8291</span>
+            </a>
             <p className="text-xs text-[#7A7265] text-center tracking-wide">
               Architectural & residential painting crafted with precision.
             </p>

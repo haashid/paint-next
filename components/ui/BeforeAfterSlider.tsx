@@ -217,9 +217,34 @@ export default function BeforeAfterSlider({
         </div>
       </div>
 
-      {/* Instructional hint */}
-      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 px-3.5 py-1 rounded-full bg-black/40 backdrop-blur-md text-white/90 text-[11px] tracking-wide pointer-events-none shadow-sm">
-        Drag or click anywhere to compare
+      {/* Instructional hint on desktop / mobile quick buttons */}
+      <div className="absolute top-3 sm:top-4 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/50 backdrop-blur-md text-white/90 text-[10px] sm:text-[11px] tracking-wide shadow-md">
+        <span className="hidden sm:inline">Drag or tap anywhere to compare</span>
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            setPositionImmediate(100);
+            setSliderPosition(100);
+          }}
+          className="sm:hidden text-white/80 hover:text-white px-1.5 py-0.5 underline cursor-pointer"
+        >
+          Before
+        </button>
+        <span className="sm:hidden text-white/40">·</span>
+        <span className="sm:hidden text-white/70">Slide</span>
+        <span className="sm:hidden text-white/40">·</span>
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            setPositionImmediate(0);
+            setSliderPosition(0);
+          }}
+          className="sm:hidden text-white/80 hover:text-white px-1.5 py-0.5 underline cursor-pointer"
+        >
+          After
+        </button>
       </div>
     </div>
   );
