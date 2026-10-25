@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ivory: #F6F3ED;
+  --color-ivory-light: #FAF8F5;
+  --color-ivory-dark: #EBE5D8;
+  --color-charcoal: #20231F;
+  --color-charcoal-light: #2A2E29;
+  --color-charcoal-dark: #151714;
+  --color-forest: #28302A;
+  --color-forest-dark: #1E2420;
+  --color-terracotta: #C65F43;
+  --color-terracotta-hover: #B24F35;
+  --color-terracotta-light: #F4EAE6;
+  --color-stone: #D8D1C5;
+  --color-stone-light: #EBE7DF;
+  --color-taupe: #A49A8B;
+  --color-taupe-dark: #7A7265;
+  --font-serif: var(--font-serif), Georgia, Cambria, serif;
+  --font-sans: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+:root {
+  --background: #F6F3ED;
+  --foreground: #20231F;
+  --primary: #C65F43;
+  --charcoal: #20231F;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #F6F3ED;
+  color: #20231F;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: #F6F3ED;
+  color: #20231F;
+  font-family: var(--font-sans), sans-serif;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Custom Selection */
+::selection {
+  background-color: #C65F43;
+  color: #FAF8F5;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F6F3ED;
+}
+::-webkit-scrollbar-thumb {
+  background: #D8D1C5;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A49A8B;
+}
+
+/* Restrained Focus Ring */
+*:focus-visible {
+  outline: 2px solid #C65F43;
+  outline-offset: 2px;
+}
+
+/* Subtle editorial text styling */
+.font-display {
+  font-family: var(--font-serif), serif;
+}
+
+.font-body {
+  font-family: var(--font-sans), sans-serif;
+}
+
+/* Smooth hardware acceleration for video & overlays */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
