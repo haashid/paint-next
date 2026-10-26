@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Play, Pause, Maximize2, Minimize2, Sparkles, ChevronRight } from "lucide-react";
+import { Maximize2, Minimize2, Sparkles } from "lucide-react";
 import Button from "../ui/Button";
 
 if (typeof window !== "undefined") {
@@ -35,7 +35,6 @@ export default function CinematicHero() {
 
   const [activeBeat, setActiveBeat] = useState(1);
   const [firstFrameReady, setFirstFrameReady] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
   // Fit mode on mobile: 'fit' keeps entire 16:9 video uncropped with ambient backdrop, 'fill' covers screen
   const [fitMode, setFitMode] = useState<"fit" | "fill">("fill");
   const [isMobile, setIsMobile] = useState(false);
@@ -45,8 +44,6 @@ export default function CinematicHero() {
   const currentFrameRef = useRef(1);
   const targetFrameRef = useRef(1);
   const rafIdRef = useRef<number | null>(null);
-  const playTimerRef = useRef<number | null>(null);
-  const isPlayingRef = useRef(false);
   const fitModeRef = useRef<"fit" | "fill">("fill");
 
   // Keep fitModeRef in sync
@@ -317,9 +314,7 @@ export default function CinematicHero() {
         end: "bottom bottom",
         scrub: 0.4,
         onUpdate: (self) => {
-          if (!isPlayingRef.current) {
-            updateOverlays(self.progress);
-          }
+          updateOverlays(self.progress);
         },
       });
     }, containerRef);
@@ -330,11 +325,6 @@ export default function CinematicHero() {
   // Jump smoothly to a specific phase
   const jumpToPhase = useCallback(
     (phaseId: number) => {
-      if (isPlayingRef.current) {
-        setIsPlaying(false);
-        isPlayingRef.current = false;
-        if (playTimerRef.current) clearInterval(playTimerRef.current);
-      }
       if (!containerRef.current) return;
       const progress = (phaseId - 1) * 0.2 + 0.05;
       const container = containerRef.current;
@@ -345,51 +335,9 @@ export default function CinematicHero() {
     []
   );
 
-  // Auto-play feature: especially convenient on phone screens
-  const togglePlay = () => {
-    if (isPlaying) {
-      setIsPlaying(false);
-      isPlayingRef.current = false;
-      if (playTimerRef.current) clearInterval(playTimerRef.current);
-    } else {
-      setIsPlaying(true);
-      isPlayingRef.current = true;
-
-      // If at end, restart from beginning
-      if (targetFrameRef.current >= TOTAL_FRAMES - 5) {
-        targetFrameRef.current = 1;
-        currentFrameRef.current = 1;
-        updateOverlays(0);
-      }
-
-      const frameStep = () => {
-        if (!isPlayingRef.current) return;
-        const next = targetFrameRef.current + 2;
-        if (next >= TOTAL_FRAMES) {
-          targetFrameRef.current = TOTAL_FRAMES;
-          updateOverlays(1);
-          setIsPlaying(false);
-          isPlayingRef.current = false;
-          if (playTimerRef.current) clearInterval(playTimerRef.current);
-        } else {
-          targetFrameRef.current = next;
-          const prog = (next - 1) / (TOTAL_FRAMES - 1);
-          updateOverlays(prog);
-        }
-      };
-
-      playTimerRef.current = window.setInterval(frameStep, 40);
-    }
-  };
-
   // Direct touch scrubbing on the timeline bar
   const handleTimelineScrub = (clientX: number) => {
     if (!timelineBarRef.current) return;
-    if (isPlayingRef.current) {
-      setIsPlaying(false);
-      isPlayingRef.current = false;
-      if (playTimerRef.current) clearInterval(playTimerRef.current);
-    }
     const rect = timelineBarRef.current.getBoundingClientRect();
     const x = Math.max(0, Math.min(rect.width, clientX - rect.left));
     const progress = x / rect.width;
@@ -460,9 +408,9 @@ export default function CinematicHero() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/35 pointer-events-none" />
 
         {/* ---------------------------------------------------- */}
-        {/* Floating Phone Controls: Play/Pause & Fit/Fill Toggle */}
+        {/* Floating Phone Controls: Fit/Fill Framing Toggle     */}
         {/* ---------------------------------------------------- */}
-        <div className="absolute top-20 sm:top-24 right-4 sm:right-8 z-30 flex items-center gap-2">
+        <div className="absolute top-20 sm:top-24 right-4 sm:right-8 z-30 flex items-center">
           {/* Mobile Fit/Fill Mode Toggle */}
           <button
             type="button"
@@ -480,26 +428,6 @@ export default function CinematicHero() {
               <>
                 <Minimize2 size={13} className="text-[#C65F43]" />
                 <span className="text-[11px] font-sans">Full View</span>
-              </>
-            )}
-          </button>
-
-          {/* Quick Play/Auto-Scrub Button */}
-          <button
-            type="button"
-            onClick={togglePlay}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#C65F43] hover:bg-[#B24F35] text-white text-xs font-medium transition-all shadow-lg active:scale-95 cursor-pointer"
-            aria-label={isPlaying ? "Pause Transformation" : "Play Transformation"}
-          >
-            {isPlaying ? (
-              <>
-                <Pause size={13} fill="currentColor" />
-                <span className="text-[11px] tracking-wide">Pause</span>
-              </>
-            ) : (
-              <>
-                <Play size={13} fill="currentColor" />
-                <span className="text-[11px] tracking-wide">Play</span>
               </>
             )}
           </button>
